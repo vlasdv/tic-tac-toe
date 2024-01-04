@@ -9,10 +9,10 @@ function Field() {
     }
   }
 
-  // return empty field  
+  // Return empty field  
   const getField = () => field;
   
-  // add player's mark
+  // Add player's mark
   const addMark = (mark, row, column) => field[row, column] = mark;
 
   // O | O | X
@@ -26,6 +26,19 @@ function Field() {
   }
   
   return {getField, addMark, printField};
+}
+
+function Cell() {
+  let value = 0;
+
+  // Add player's mark to the cell
+  const addMark = (mark) => {
+    value = mark;
+  };
+  
+  const getValue = () => value;
+
+  return {addMark, getValue};
 }
 
 
