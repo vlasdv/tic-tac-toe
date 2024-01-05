@@ -13,7 +13,7 @@ function Field() {
   const getField = () => field;
   
   // Add player's mark
-  const addMark = (mark, row, column) => field[row, column] = mark;
+  const addMark = (mark, row, column) => field[row][column] = mark;
 
   // O | O | X
   // –-+-–-+-–
@@ -68,14 +68,14 @@ function GameController(playerOneName = 'Human', playerTwoName = 'Computer') {
   // player's name
   const printNewRound = () => {
     field.printField();
-    console.log(`${getActivePlayer}'s turn.`);
+    console.log(`${getActivePlayer().name}'s turn.`);
   }
   
   // play round (row, column):
   // add player's mark to chosen row:column
   const playRound = (row, column) => {
-    console.log(`Adding ${activePlayer}'s mark to ${row}:${column}...`);
-    field.addMark(activePlayer.mark, row, column);    
+    console.log(`Adding ${getActivePlayer().name}'s mark to ${row}:${column}...`);
+    field.addMark(getActivePlayer().mark, row, column);    
 
     switchPlayer();
     printNewRound();
