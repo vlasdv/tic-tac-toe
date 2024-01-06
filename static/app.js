@@ -26,6 +26,56 @@ function Field() {
     return availableCells;
   };
 
+  const checkMatch = () => {
+    // const winningCombinations = [
+    //   field[0][0] !== '.' && field[0][0] === field[0][1] && field[0][1] === field[0][2],
+    //   field[1][1] !== '.' && field[1][1] === field[1][1] && field[1][1] === field[1][2],
+    //   field[2][1] !== '.' && field[2][1] === field[2][1] && field[2][1] === field[2][2], 
+    //   field[0][0] !== '.' && field[0][0] === field[1][0] && field[1][0] === field[2][0],
+    //   field[0][1] !== '.' && field[0][1] === field[1][1] && field[1][1] === field[2][1],
+    //   field[0][2] !== '.' && field[0][2] === field[1][2] && field[1][2] === field[2][2],
+    //   field[0][0] !== '.' && field[0][0] === field[1][1] && field[1][1] === field[2][2],
+    //   field[0][2] !== '.' && field[0][2] === field[1][1] && field[1][1] === field[2][0]
+    // ];
+
+    const field = getField();
+
+    function horizontal() {
+      for (let i = 0; i < rows; i++) {        
+        if (field[i][0].getMark() !== Cell().getMark()) {
+          if (field[i][0].getMark() === field[i][1].getMark() && field[i][1].getMark() === field[i][2].getMark()) {
+            console.log('winner is: ' + field[i][0].getMark()); 
+            return field[i][0].getMark();
+          }
+        }        
+      }
+      return false;
+    };
+
+    function vertical() {
+      for (let j = 0; j < columns; j++) {        
+        if (field[0][j].getMark() !== Cell().getMark()) {
+          if (field[0][j].getMark() === field[1][j].getMark() && field[1][j].getMark() === field[2][j].getMark()) {
+            console.log('winner is: ' + field[0][j].getMark()); 
+            return field[0][j].getMark();
+          }
+        }        
+      }
+      return false;
+    }    
+
+    function diagonal() {
+      if (field[1][1].getMark() !== Cell().getMark()) {
+        if (field[0][0].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][2].getMark() ||
+            field[0][0].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][2].getMark()) {
+          return field[1][1].getMark();
+        } 
+      }
+      return false;
+    }
+    
+    return horizontal() || vertical() || diagonal();    
+  };
   // O | O | X
   // –-+-–-+-–
   // X | X | O
@@ -40,7 +90,7 @@ function Field() {
     console.log(` ${field[2][0].getMark()} | ${field[2][1].getMark()} | ${field[2][2].getMark()} `);
   }
   
-  return {getField, addMark, getAvailableCells, printField};
+  return {getField, addMark, getAvailableCells, printField, checkMatch};
 }
 
 function Cell(cellRow, cellColumn) {
@@ -91,6 +141,7 @@ function GameController(playerOneName = 'Human', playerTwoName = 'Computer') {
     console.log(`Adding ${getActivePlayer().name}'s mark to ${row}:${column}...`);
     field.addMark(getActivePlayer().mark, row, column);    
 
+    console.log('returned winner is: ' + field.checkMatch());
     switchPlayer();
     printNewRound();
   }
