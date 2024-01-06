@@ -23,7 +23,13 @@ function Field() {
     for (let i = 0; i < rows; i++) {
       availableCells[i] = field[i].filter((cell) => cell.getMark() === '.');      
     }
-    return availableCells;
+    
+    if (availableCells[0].length === 0 && availableCells[1].length === 0 && availableCells[2].length === 0) {
+      return false;
+    } else {
+      return availableCells;
+    }
+    
   };
 
   const checkMatch = () => {
@@ -67,7 +73,7 @@ function Field() {
     function diagonal() {
       if (field[1][1].getMark() !== Cell().getMark()) {
         if (field[0][0].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][2].getMark() ||
-            field[0][0].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][2].getMark()) {
+            field[0][2].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[0][0].getMark()) {
           return field[1][1].getMark();
         } 
       }
@@ -140,10 +146,17 @@ function GameController(playerOneName = 'Human', playerTwoName = 'Computer') {
   const playRound = (row, column) => {
     console.log(`Adding ${getActivePlayer().name}'s mark to ${row}:${column}...`);
     field.addMark(getActivePlayer().mark, row, column);    
-
-    console.log('returned winner is: ' + field.checkMatch());
-    switchPlayer();
-    printNewRound();
+    
+    const match = field.checkMatch()
+    if (match) {
+      const winner = (match === players[0].mark) ? players[0].name : players[1].name;
+      console.log(`The winner is ${winner}!`);
+    } else if (field.getAvailableCells()) {
+      switchPlayer();
+      printNewRound();
+    } else {
+      console.log("It's a tie!");
+    }    
   }
 
   // Initial round play
