@@ -16,7 +16,6 @@ function Field() {
   const addMark = (mark, row, column) => field[row][column].addMark(mark);
 
   // Get available cells 
-  // const getAvailableCells = () => field.filter((cell) => cell.getMark() !== ' ');
   const getAvailableCells = () => {
     // console.log(`current field is: ${field[0][0].getMark()}`);
     let availableCells = [];
@@ -33,16 +32,6 @@ function Field() {
   };
 
   const checkMatch = () => {
-    // const winningCombinations = [
-    //   field[0][0] !== '.' && field[0][0] === field[0][1] && field[0][1] === field[0][2],
-    //   field[1][1] !== '.' && field[1][1] === field[1][1] && field[1][1] === field[1][2],
-    //   field[2][1] !== '.' && field[2][1] === field[2][1] && field[2][1] === field[2][2], 
-    //   field[0][0] !== '.' && field[0][0] === field[1][0] && field[1][0] === field[2][0],
-    //   field[0][1] !== '.' && field[0][1] === field[1][1] && field[1][1] === field[2][1],
-    //   field[0][2] !== '.' && field[0][2] === field[1][2] && field[1][2] === field[2][2],
-    //   field[0][0] !== '.' && field[0][0] === field[1][1] && field[1][1] === field[2][2],
-    //   field[0][2] !== '.' && field[0][2] === field[1][1] && field[1][1] === field[2][0]
-    // ];
 
     const field = getField();
 
@@ -82,12 +71,7 @@ function Field() {
     
     return horizontal() || vertical() || diagonal();    
   };
-  // O | O | X
-  // –-+-–-+-–
-  // X | X | O
-  // ––+–––+––
-  // O | X | O
-
+  
   const printField = () => {
     console.log(` ${field[0][0].getMark()} | ${field[0][1].getMark()} | ${field[0][2].getMark()} `);
     console.log('---+---+---');
