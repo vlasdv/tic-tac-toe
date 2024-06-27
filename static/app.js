@@ -61,8 +61,9 @@ function Field() {
 
     function diagonal() {
       if (field[1][1].getMark() !== Cell().getMark()) {
-        if (field[0][0].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][2].getMark() ||
-            field[0][2].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[0][0].getMark()) {
+        console.log('center is clear')
+        if ( (field[0][0].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][2].getMark()) ||
+             (field[0][2].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][0].getMark()) ) {
           return field[1][1].getMark();
         } 
       }
