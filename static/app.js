@@ -98,8 +98,8 @@ function Cell(cellRow, cellColumn) {
   return {addMark, getMark, getPosition};
 }
 
-function GameController(playerOneName = 'Human', playerTwoName = 'Computer') {
-  const field = Field();
+function GameController(playerOneName='Human', playerTwoName='Computer') {
+  let field = Field();
 
   const players = [
     {
@@ -143,9 +143,13 @@ function GameController(playerOneName = 'Human', playerTwoName = 'Computer') {
     }    
   }
 
+  const startOver = () => {
+    field = Field()    
+  }
+
   // Initial round play
   printNewRound();
 
-  return {playRound, getActivePlayer};
+  return {playRound, getActivePlayer, startOver};
 }
 
