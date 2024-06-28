@@ -167,10 +167,11 @@ function addInterface() {
 
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
-      const button = document.createElement('button')
-      button.id = `${i}${j}`
-      console.log(`Button ${button.id} created`)
-      fieldContainer.appendChild(button)
+      const button = document.createElement('button');
+      button.className = 'field-buttons';
+      button.id = `${i}${j}`;
+      console.log(`Button ${button.id} created`);
+      fieldContainer.appendChild(button);
     }
   }
 }
