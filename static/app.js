@@ -1,3 +1,5 @@
+addInterface()
+
 function Field() {
   const rows = 3;
   const columns = 3;
@@ -158,5 +160,18 @@ function GameController(playerOneName='Human', playerTwoName='Computer') {
   printNewRound();
 
   return {playRound, getActivePlayer, startOver};
+}
+
+function addInterface() {
+  const fieldContainer = document.querySelector('.field');
+
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      const button = document.createElement('button')
+      button.id = `${i}${j}`
+      console.log(`Button ${button.id} created`)
+      fieldContainer.appendChild(button)
+    }
+  }
 }
 
