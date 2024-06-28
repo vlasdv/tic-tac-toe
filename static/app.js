@@ -61,7 +61,6 @@ function Field() {
 
     function diagonal() {
       if (field[1][1].getMark() !== Cell().getMark()) {
-        console.log('center is clear')
         if ( (field[0][0].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][2].getMark()) ||
              (field[0][2].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][0].getMark()) ) {
           return field[1][1].getMark();
@@ -123,29 +122,36 @@ function GameController(playerOneName='Human', playerTwoName='Computer') {
   const printNewRound = () => {
     field.printField();
     console.log(`${getActivePlayer().name}'s turn.`);    
-    field.getAvailableCells().forEach( (row) => row.forEach( (cell) => console.log(cell.getPosition())));
+    field.getAvailableCells().forEach( (row) => row.forEach( (cell) => console.log(cell.getPosition()) ) );
   }
   
   // play round (row, column):
   // add player's mark to chosen row:column
   const playRound = (row, column) => {
-    console.log(`Adding ${getActivePlayer().name}'s mark to ${row}:${column}...`);
-    field.addMark(getActivePlayer().mark, row, column);    
+    console.log(`Adding ${getActivePlayer().name}'s mark to ${row}:${column}...`);    
     
-    const match = field.checkMatch()
-    if (match) {
-      const winner = (match === players[0].mark) ? players[0].name : players[1].name;
-      console.log(`The winner is ${winner}!`);
-    } else if (field.getAvailableCells()) {
-      switchPlayer();
-      printNewRound();
+    const currentCell = field.getField()[row][column];
+
+    if (currentCell.getMark() === Cell().getMark()) {
+      field.addMark(getActivePlayer().mark, row, column);    
+      const match = field.checkMatch()
+      if (match) {
+        const winner = (match === players[0].mark) ? players[0].name : players[1].name;
+        console.log(`The winner is ${winner}!`);
+      } else if (field.getAvailableCells()) {
+        switchPlayer();
+        printNewRound();
+      } else {
+        console.log("It's a tie!");
+      }  
     } else {
-      console.log("It's a tie!");
-    }    
+      console.log('This cell was already used, try another one');
+      printNewRound();   
+    }  
   }
 
   const startOver = () => {
-    field = Field()    
+    field = Field();    
   }
 
   // Initial round play
