@@ -17,31 +17,21 @@ function Field() {
 
   // Get available cells 
   const getAvailableCells = () => {
-    // console.log(`current field is: ${field[0][0].getMark()}`);
-    let availableCells = [];
-    for (let i = 0; i < rows; i++) {
-      availableCells[i] = field[i].filter((cell) => cell.getMark() === '.');      
-    }
-    
-    if (availableCells[0].length === 0 && availableCells[1].length === 0 && availableCells[2].length === 0) {
-      return false;
-    } else {
-      return availableCells;
-    }
-    
+    return field.flat().filter(cell => cell.getMark() === '.');
   };
 
   const checkMatch = () => {
 
-    const field = getField();
+    // const field = getField();
 
     function horizontal() {
       for (let i = 0; i < rows; i++) {        
         if (field[i][0].getMark() !== Cell().getMark()) {
           if (field[i][0].getMark() === field[i][1].getMark() && field[i][1].getMark() === field[i][2].getMark()) {            
-            winningCombo.push(`b${i}0`);
-            winningCombo.push(`b${i}1`);
-            winningCombo.push(`b${i}2`);
+            winningCombo = [`b${i}0`, `b${i}1`, `b${i}2`];
+            // winningCombo.push(`b${i}0`);
+            // winningCombo.push(`b${i}1`);
+            // winningCombo.push(`b${i}2`);
             console.log('winner is: ' + field[i][0].getMark()); 
             return field[i][0].getMark();
           }
@@ -54,9 +44,10 @@ function Field() {
       for (let j = 0; j < columns; j++) {        
         if (field[0][j].getMark() !== Cell().getMark()) {
           if (field[0][j].getMark() === field[1][j].getMark() && field[1][j].getMark() === field[2][j].getMark()) {
-            winningCombo.push(`b0${j}`);
-            winningCombo.push(`b1${j}`);
-            winningCombo.push(`b2${j}`);
+            winningCombo = [`b0${j}`, `b1${j}`, `b2${j}`];
+            // winningCombo.push(`b0${j}`);
+            // winningCombo.push(`b1${j}`);
+            // winningCombo.push(`b2${j}`);
             console.log('winner is: ' + field[0][j].getMark()); 
             return field[0][j].getMark();
           }
@@ -68,14 +59,16 @@ function Field() {
     function diagonal() {
       if (field[1][1].getMark() !== Cell().getMark()) {
         if (field[0][0].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][2].getMark()) {
-          winningCombo.push("b00");
-          winningCombo.push("b11");
-          winningCombo.push("b22");
+          winningCombo = ["b00", "b11", "b22"];
+          // winningCombo.push("b00");
+          // winningCombo.push("b11");
+          // winningCombo.push("b22");
           return field[1][1].getMark();
         } else if (field[0][2].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][0].getMark()) {
-          winningCombo.push("b02");
-          winningCombo.push("b11");
-          winningCombo.push("b20");          
+          winningCombo = ["b02", "b11", "b20"];
+          // winningCombo.push("b02");
+          // winningCombo.push("b11");
+          // winningCombo.push("b20");          
           return field[1][1].getMark();
         } 
       }
@@ -142,7 +135,6 @@ function GameController(playerOneName='X', playerTwoName='O') {
     const gameStatus = document.querySelector(".game-status");
     gameStatus.textContent = currentTurnText;
 
-    field.getAvailableCells().forEach( (row) => row.forEach( (cell) => console.log(cell.getPosition()) ) );
   }
   
   // play round (row, column):
