@@ -93,6 +93,8 @@ function Cell(cellRow, cellColumn) {
   // Add player's mark to the cell
   const addMark = (newMark) => {
     mark = newMark;
+    const currentButton = document.querySelector(`#b${row}${column}`);
+    currentButton.textContent = newMark
   };
   const getMark = () => mark;
   const getPosition = () => ({ row, column });
@@ -169,20 +171,21 @@ function addInterface() {
     for (let j = 0; j < 3; j++) {
       const button = document.createElement('button');
       button.className = 'field-buttons';
-      button.id = `${i}${j}`;
+      button.id = `b${i}${j}`;
+      button.textContent = "\u2060";
       console.log(`Button ${button.id} created`);
       fieldContainer.appendChild(button);
 
       button.addEventListener('click', () => {
-        const row = +button.id.charAt(0);
-        const column = +button.id.charAt(1);
+        const row = +button.id.charAt(1);
+        const column = +button.id.charAt(2);
         console.log(button.id);
         console.log(`row: ${row}, column: ${column}`);
         
         game.playRound(row, column);
       });
     }
-  }
+  }  
 }
 
 const game = GameController()
