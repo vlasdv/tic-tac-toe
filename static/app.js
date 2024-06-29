@@ -100,7 +100,7 @@ function Cell(cellRow, cellColumn) {
   return {addMark, getMark, getPosition};
 }
 
-function GameController(playerOneName='Human', playerTwoName='Computer') {
+function GameController(playerOneName='X', playerTwoName='O') {
   let field = Field();
 
   const players = [
@@ -123,7 +123,12 @@ function GameController(playerOneName='Human', playerTwoName='Computer') {
   // player's name
   const printNewRound = () => {
     field.printField();
-    console.log(`${getActivePlayer().name}'s turn.`);    
+    const currentTurnText = `${getActivePlayer().name}'s turn.`;
+    console.log(currentTurnText);    
+
+    const gameStatus = document.querySelector(".game-status");
+    gameStatus.textContent = currentTurnText;
+
     field.getAvailableCells().forEach( (row) => row.forEach( (cell) => console.log(cell.getPosition()) ) );
   }
   
@@ -139,7 +144,12 @@ function GameController(playerOneName='Human', playerTwoName='Computer') {
       const match = field.checkMatch()
       if (match) {
         const winner = (match === players[0].mark) ? players[0].name : players[1].name;
-        console.log(`The winner is ${winner}!`);
+        const winnerText = `The winner is ${winner}!`;
+        console.log(winnerText);
+
+        const gameStatus = document.querySelector(".game-status");
+        gameStatus.textContent = winnerText;
+
       } else if (field.getAvailableCells()) {
         switchPlayer();
         printNewRound();
