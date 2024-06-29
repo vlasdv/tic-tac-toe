@@ -1,5 +1,3 @@
-addInterface()
-
 function Field() {
   const rows = 3;
   const columns = 3;
@@ -155,7 +153,7 @@ function GameController(playerOneName='Human', playerTwoName='Computer') {
   }
 
   const startOver = () => {
-    field = Field();    
+    game = GameController();
   }
 
   // Initial round play
@@ -164,7 +162,7 @@ function GameController(playerOneName='Human', playerTwoName='Computer') {
   return {playRound, getActivePlayer, startOver};
 }
 
-function addInterface() {
+function setupInterface() {
   const fieldContainer = document.querySelector('.field');
 
   for (let i = 0; i < 3; i++) {
@@ -186,7 +184,17 @@ function addInterface() {
       });
     }
   }  
+
+  const restart = document.querySelector(".restart")
+  restart.addEventListener('click', () => {
+    game.startOver();
+    const buttons = document.querySelectorAll(".field-buttons")
+    buttons.forEach((button) => button.textContent = "\u2060");
+  })
 }
 
-const game = GameController()
+let game = GameController()
+setupInterface()
+
+
 
