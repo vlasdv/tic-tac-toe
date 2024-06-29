@@ -15,4 +15,6 @@ main {
   width: 100px;
   height: 100px;
   margin: 10px;
+  font-size: 60pt;
+  border-style: none;
 }
