@@ -28,10 +28,7 @@ function Field() {
       for (let i = 0; i < rows; i++) {        
         if (field[i][0].getMark() !== Cell().getMark()) {
           if (field[i][0].getMark() === field[i][1].getMark() && field[i][1].getMark() === field[i][2].getMark()) {            
-            winningCombo = [`b${i}0`, `b${i}1`, `b${i}2`];
-            // winningCombo.push(`b${i}0`);
-            // winningCombo.push(`b${i}1`);
-            // winningCombo.push(`b${i}2`);
+            winningCombo = [`b${i}0`, `b${i}1`, `b${i}2`];            
             console.log('winner is: ' + field[i][0].getMark()); 
             return field[i][0].getMark();
           }
@@ -45,9 +42,6 @@ function Field() {
         if (field[0][j].getMark() !== Cell().getMark()) {
           if (field[0][j].getMark() === field[1][j].getMark() && field[1][j].getMark() === field[2][j].getMark()) {
             winningCombo = [`b0${j}`, `b1${j}`, `b2${j}`];
-            // winningCombo.push(`b0${j}`);
-            // winningCombo.push(`b1${j}`);
-            // winningCombo.push(`b2${j}`);
             console.log('winner is: ' + field[0][j].getMark()); 
             return field[0][j].getMark();
           }
@@ -60,15 +54,9 @@ function Field() {
       if (field[1][1].getMark() !== Cell().getMark()) {
         if (field[0][0].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][2].getMark()) {
           winningCombo = ["b00", "b11", "b22"];
-          // winningCombo.push("b00");
-          // winningCombo.push("b11");
-          // winningCombo.push("b22");
           return field[1][1].getMark();
         } else if (field[0][2].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][0].getMark()) {
-          winningCombo = ["b02", "b11", "b20"];
-          // winningCombo.push("b02");
-          // winningCombo.push("b11");
-          // winningCombo.push("b20");          
+          winningCombo = ["b02", "b11", "b20"];         
           return field[1][1].getMark();
         } 
       }
@@ -98,7 +86,7 @@ function Cell(cellRow, cellColumn) {
   const addMark = (newMark) => {
     mark = newMark;
     const currentButton = document.querySelector(`#b${row}${column}`);
-    currentButton.textContent = newMark
+    currentButton.textContent = newMark;
   };
   const getMark = () => mark;
   const getPosition = () => ({ row, column });
@@ -210,28 +198,25 @@ function setupInterface() {
     game.startOver();    
     const buttons = document.querySelectorAll(".field-buttons")
     buttons.forEach((button) => { 
-      button.textContent = "\u2060"
+      button.textContent = "\u2060";
       button.disabled = false;
     });
   })
 }
 
 function disableButtons() {
-  let winningButtons = []
+  let winningButtons = [];
   winningCombo.forEach((id) => {
     winningButtons.push(document.querySelector(`#${id}`));
   });
-  const buttons = document.querySelectorAll(".field-buttons")
+  const buttons = document.querySelectorAll(".field-buttons");
     buttons.forEach((button) => {
       if (!winningButtons.includes(button)) {
-        button.disabled = true
+        button.disabled = true;
       }      
     });
 }
 
-let winningCombo = []
-let game = GameController()
-setupInterface()
-
-
-
+let winningCombo = [];
+let game = GameController();
+setupInterface();
