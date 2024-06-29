@@ -172,7 +172,18 @@ function addInterface() {
       button.id = `${i}${j}`;
       console.log(`Button ${button.id} created`);
       fieldContainer.appendChild(button);
+
+      button.addEventListener('click', () => {
+        const row = +button.id.charAt(0);
+        const column = +button.id.charAt(1);
+        console.log(button.id);
+        console.log(`row: ${row}, column: ${column}`);
+        
+        game.playRound(row, column);
+      });
     }
   }
 }
+
+const game = GameController()
 
