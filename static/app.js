@@ -38,7 +38,10 @@ function Field() {
     function horizontal() {
       for (let i = 0; i < rows; i++) {        
         if (field[i][0].getMark() !== Cell().getMark()) {
-          if (field[i][0].getMark() === field[i][1].getMark() && field[i][1].getMark() === field[i][2].getMark()) {
+          if (field[i][0].getMark() === field[i][1].getMark() && field[i][1].getMark() === field[i][2].getMark()) {            
+            winningCombo.push(`b${i}0`);
+            winningCombo.push(`b${i}1`);
+            winningCombo.push(`b${i}2`);
             console.log('winner is: ' + field[i][0].getMark()); 
             return field[i][0].getMark();
           }
@@ -51,6 +54,9 @@ function Field() {
       for (let j = 0; j < columns; j++) {        
         if (field[0][j].getMark() !== Cell().getMark()) {
           if (field[0][j].getMark() === field[1][j].getMark() && field[1][j].getMark() === field[2][j].getMark()) {
+            winningCombo.push(`b0${j}`);
+            winningCombo.push(`b1${j}`);
+            winningCombo.push(`b2${j}`);
             console.log('winner is: ' + field[0][j].getMark()); 
             return field[0][j].getMark();
           }
@@ -61,8 +67,15 @@ function Field() {
 
     function diagonal() {
       if (field[1][1].getMark() !== Cell().getMark()) {
-        if ( (field[0][0].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][2].getMark()) ||
-             (field[0][2].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][0].getMark()) ) {
+        if (field[0][0].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][2].getMark()) {
+          winningCombo.push("b00");
+          winningCombo.push("b11");
+          winningCombo.push("b22");
+          return field[1][1].getMark();
+        } else if (field[0][2].getMark() === field[1][1].getMark() && field[1][1].getMark() === field[2][0].getMark()) {
+          winningCombo.push("b02");
+          winningCombo.push("b11");
+          winningCombo.push("b20");          
           return field[1][1].getMark();
         } 
       }
@@ -168,6 +181,7 @@ function GameController(playerOneName='X', playerTwoName='O') {
 
   const startOver = () => {
     game = GameController();
+    winningCombo = [];
   }
 
   // Initial round play
@@ -201,7 +215,7 @@ function setupInterface() {
 
   const restart = document.querySelector(".restart")
   restart.addEventListener('click', () => {
-    game.startOver();
+    game.startOver();    
     const buttons = document.querySelectorAll(".field-buttons")
     buttons.forEach((button) => { 
       button.textContent = "\u2060"
@@ -211,10 +225,19 @@ function setupInterface() {
 }
 
 function disableButtons() {
+  let winningButtons = []
+  winningCombo.forEach((id) => {
+    winningButtons.push(document.querySelector(`#${id}`));
+  });
   const buttons = document.querySelectorAll(".field-buttons")
-    buttons.forEach((button) => button.disabled = true);
+    buttons.forEach((button) => {
+      if (!winningButtons.includes(button)) {
+        button.disabled = true
+      }      
+    });
 }
 
+let winningCombo = []
 let game = GameController()
 setupInterface()
 
