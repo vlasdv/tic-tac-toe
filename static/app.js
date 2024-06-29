@@ -138,6 +138,7 @@ function GameController(playerOneName='X', playerTwoName='O') {
     console.log(`Adding ${getActivePlayer().name}'s mark to ${row}:${column}...`);    
     
     const currentCell = field.getField()[row][column];
+    const gameStatus = document.querySelector(".game-status");
 
     if (currentCell.getMark() === Cell().getMark()) {
       field.addMark(getActivePlayer().mark, row, column);    
@@ -146,15 +147,18 @@ function GameController(playerOneName='X', playerTwoName='O') {
         const winner = (match === players[0].mark) ? players[0].name : players[1].name;
         const winnerText = `The winner is ${winner}!`;
         console.log(winnerText);
-
-        const gameStatus = document.querySelector(".game-status");
+        
         gameStatus.textContent = winnerText;
-
+        disableButtons();
       } else if (field.getAvailableCells()) {
         switchPlayer();
         printNewRound();
       } else {
-        console.log("It's a tie!");
+        const tieText = "It's a tie!";
+        console.log(tieText);
+        
+        gameStatus.textContent = tieText;
+        disableButtons();        
       }  
     } else {
       console.log('This cell was already used, try another one');
@@ -199,8 +203,16 @@ function setupInterface() {
   restart.addEventListener('click', () => {
     game.startOver();
     const buttons = document.querySelectorAll(".field-buttons")
-    buttons.forEach((button) => button.textContent = "\u2060");
+    buttons.forEach((button) => { 
+      button.textContent = "\u2060"
+      button.disabled = false;
+    });
   })
+}
+
+function disableButtons() {
+  const buttons = document.querySelectorAll(".field-buttons")
+    buttons.forEach((button) => button.disabled = true);
 }
 
 let game = GameController()
