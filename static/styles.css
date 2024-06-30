@@ -3,7 +3,7 @@
   --accent-color: rgb(255, 137, 188);
   --field-lines: rgb(107, 181, 241);
   --field-lighter: rgb(152, 212, 248);
-  --dark-font: rgb(34, 146, 237);
+  --dark-font: rgb(34, 146, 237);  
 }
 
 * {
@@ -26,23 +26,29 @@ body {
 
 .game-status {
   text-align: center;
-  font-size: 20pt;  
+  font-size: 30px;  
   margin: 0;
 
   color: var(--dark-font);
 }
 
-.field {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.field {  
+  width: 70vmin;
+  height: 70vmin;
+
+  display: grid;  
+  grid-template-columns: repeat(3, 33.3%);
+  grid-template-rows: repeat(3, 33.3%);
   gap: 3px;
 
   background-color: var(--field-lines);  
 }
 
-.field-buttons {  
-  aspect-ratio: 1/1;
-  font-size: 60pt;
+.field-buttons {    
+  min-width: 10vmin;
+  min-height: 10vmin;
+  font-size: 10vmin;
+  
   border-style: none;
   background-color: var(--lightest-color);
   color: var(--accent-color);
@@ -54,7 +60,7 @@ body {
 }
 
 .restart {
-  font-size: 20pt;
+  font-size: 30px;
   padding: 10pt;
 
   color: var(--lightest-color);
