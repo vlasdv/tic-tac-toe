@@ -11,15 +11,15 @@
 }
 
 body {
-  max-width: 100svw;
+  width: 100svw;
   height: 100svh;
 
   display: grid;
   justify-content: center;
-  align-items: center;
+  align-items: center;  
 }
 
-.container {  
+.container {    
   display: grid;
   gap: 30px;  
 }
@@ -34,24 +34,23 @@ body {
 
 .field {
   display: grid;
-  grid-template-rows: repeat(3, 200px);
-  grid-template-columns: repeat(3, 200px);
+  grid-template-columns: repeat(3, 1fr);
   gap: 3px;
 
   background-color: var(--field-lines);  
 }
 
 .field-buttons {  
+  aspect-ratio: 1/1;
   font-size: 60pt;
   border-style: none;
   background-color: var(--lightest-color);
   color: var(--accent-color);
 }
 
-.winner-buttons {
+.winner-buttons {  
   background-color: var(--field-lighter);
   color: var(--lightest-color);
-  font-size: 80pt;
 }
 
 .restart {
