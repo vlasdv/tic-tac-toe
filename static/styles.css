@@ -1,3 +1,11 @@
+:root {
+  --lightest-color: rgb(253, 253, 253);
+  --accent-color: rgb(255, 137, 188);
+  --field-lines: rgb(107, 181, 241);
+  --field-lighter: rgb(152, 212, 248);
+  --dark-font: rgb(34, 146, 237);
+}
+
 * {
   font-family: 'Playwrite IT Moderna', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -21,7 +29,7 @@ body {
   font-size: 20pt;  
   margin: 0;
 
-  color: rgb(34, 146, 237);
+  color: var(--dark-font);
 }
 
 .field {
@@ -30,19 +38,19 @@ body {
   grid-template-columns: repeat(3, 200px);
   gap: 3px;
 
-  background-color: rgb(107, 181, 241);
+  background-color: var(--field-lines);  
 }
 
 .field-buttons {  
   font-size: 60pt;
   border-style: none;
-  background-color: white;
-  color: rgb(255, 137, 188);
+  background-color: var(--lightest-color);
+  color: var(--accent-color);
 }
 
 .winner-buttons {
-  background-color: rgb(152, 212, 248);
-  color: white;
+  background-color: var(--field-lighter);
+  color: var(--lightest-color);
   font-size: 80pt;
 }
 
@@ -50,8 +58,8 @@ body {
   font-size: 20pt;
   padding: 10pt;
 
-  color: rgb(255, 237, 250);
-  background-color: rgb(255, 137, 188);
+  color: var(--lightest-color);
+  background-color: var(--accent-color);
   
   border-radius: 10px;
   border: none;
