@@ -52,6 +52,7 @@ body {
   min-width: 10vmin;
   min-height: 10vmin;
   font-size: 10vmin;
+  padding: 0;
 
   border-style: none;
   background-color: var(--lightest-color);
