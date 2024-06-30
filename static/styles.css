@@ -33,12 +33,16 @@ body {
 }
 
 .field {  
-  width: 70vmin;
-  height: 70vmin;
+  min-width: 70vmin;
+  min-height: 70vmin;
 
   display: grid;  
-  grid-template-columns: repeat(3, 33.3%);
-  grid-template-rows: repeat(3, 33.3%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+
+  align-items: stretch;
+  justify-content: stretch;
+
   gap: 3px;
 
   background-color: var(--field-lines);  
@@ -48,7 +52,7 @@ body {
   min-width: 10vmin;
   min-height: 10vmin;
   font-size: 10vmin;
-  
+
   border-style: none;
   background-color: var(--lightest-color);
   color: var(--accent-color);
