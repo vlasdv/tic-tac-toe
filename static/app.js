@@ -185,7 +185,6 @@ function setupInterface() {
       button.addEventListener('click', () => {
         const row = +button.id.charAt(1);
         const column = +button.id.charAt(2);
-        console.log(button.id);
         console.log(`row: ${row}, column: ${column}`);
         
         game.playRound(row, column);
