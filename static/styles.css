@@ -1,5 +1,5 @@
 * {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Playwrite IT Moderna', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -20,6 +20,8 @@ body {
   text-align: center;
   font-size: 20pt;  
   margin: 0;
+
+  color: rgb(34, 146, 237);
 }
 
 .field {
@@ -28,15 +30,29 @@ body {
   grid-template-columns: repeat(3, 200px);
   gap: 3px;
 
-  background-color: #bbb;
+  background-color: rgb(107, 181, 241);
 }
 
 .field-buttons {  
   font-size: 60pt;
   border-style: none;
+  background-color: white;
+  color: rgb(255, 137, 188);
+}
+
+.winner-buttons {
+  background-color: rgb(152, 212, 248);
+  color: white;
+  font-size: 80pt;
 }
 
 .restart {
   font-size: 20pt;
   padding: 10pt;
+
+  color: rgb(255, 237, 250);
+  background-color: rgb(255, 137, 188);
+  
+  border-radius: 10px;
+  border: none;
 }

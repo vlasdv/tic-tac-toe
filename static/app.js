@@ -196,11 +196,10 @@ function setupInterface() {
   const restart = document.querySelector(".restart")
   restart.addEventListener('click', () => {
     game.startOver();    
-    const buttons = document.querySelectorAll(".field-buttons")
-    buttons.forEach((button) => { 
-      button.textContent = "\u2060";
-      button.disabled = false;
-    });
+
+    const fieldContainer = document.querySelector(".field");
+    fieldContainer.replaceChildren();
+    setupInterface();
   })
 }
 
@@ -210,11 +209,12 @@ function disableButtons() {
     winningButtons.push(document.querySelector(`#${id}`));
   });
   const buttons = document.querySelectorAll(".field-buttons");
-    buttons.forEach((button) => {
-      if (!winningButtons.includes(button)) {
-        button.disabled = true;
-      }      
-    });
+  buttons.forEach((button) => {
+    button.disabled = true;
+    if (winningButtons.includes(button)) {
+      button.classList.add("winner-buttons");
+    }            
+  });
 }
 
 let winningCombo = [];
