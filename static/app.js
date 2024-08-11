@@ -16,7 +16,7 @@ function Field() {
   const addMark = (mark, row, column) => field[row][column].addMark(mark);
 
   // Get available cells 
-  const getAvailableCells = () => {
+  const getAvailableCells = () => {    
     return field.flat().filter(cell => cell.getMark() === '.');
   };
 
@@ -122,30 +122,34 @@ function GameController(playerOneName='X', playerTwoName='O') {
 
     const gameStatus = document.querySelector(".game-status");
     gameStatus.textContent = currentTurnText;
-
   }
   
   // play round (row, column):
   // add player's mark to chosen row:column
   const playRound = (row, column) => {
     console.log(`Adding ${getActivePlayer().name}'s mark to ${row}:${column}...`);    
+    console.log("Available cells: " + field.getAvailableCells());
     
     const currentCell = field.getField()[row][column];
     const gameStatus = document.querySelector(".game-status");
 
     if (currentCell.getMark() === Cell().getMark()) {
-      field.addMark(getActivePlayer().mark, row, column);    
-      const match = field.checkMatch()
+      // Place player's mark on the field:
+      field.addMark(getActivePlayer().mark, row, column);
+      
+      // Check if there is a match:
+      const match = field.checkMatch()      
       if (match) {
         const winner = (match === players[0].mark) ? players[0].name : players[1].name;
-        const winnerText = `The winner is ${winner}!`;
-        console.log(winnerText);
-        
+        const winnerText = `The winner is ${winner}!`;                
         gameStatus.textContent = winnerText;
         disableButtons();
-      } else if (field.getAvailableCells()) {
+
+      // If there is no match, but there are still available cells:  
+      } else if (field.getAvailableCells().length > 0) {  
         switchPlayer();
         printNewRound();
+            
       } else {
         const tieText = "It's a tie!";
         console.log(tieText);
