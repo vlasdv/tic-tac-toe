@@ -66,15 +66,7 @@ function Field() {
     return horizontal() || vertical() || diagonal();    
   };
   
-  const printField = () => {
-    console.log(` ${field[0][0].getMark()} | ${field[0][1].getMark()} | ${field[0][2].getMark()} `);
-    console.log('---+---+---');
-    console.log(` ${field[1][0].getMark()} | ${field[1][1].getMark()} | ${field[1][2].getMark()} `);
-    console.log('---+---+---');
-    console.log(` ${field[2][0].getMark()} | ${field[2][1].getMark()} | ${field[2][2].getMark()} `);
-  }
-  
-  return {getField, addMark, getAvailableCells, printField, checkMatch};
+  return {getField, addMark, getAvailableCells, checkMatch};
 }
 
 function Cell(cellRow, cellColumn) {
@@ -115,8 +107,7 @@ function GameController(playerOneName='X', playerTwoName='O') {
   // print current round:
   // current field status
   // player's name
-  const printNewRound = () => {
-    field.printField();
+  const printNewRound = () => {    
     const currentTurnText = `${getActivePlayer().name}'s turn.`;
     console.log(currentTurnText);    
 
